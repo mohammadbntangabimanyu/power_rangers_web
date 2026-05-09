@@ -1,0 +1,1072 @@
+.app {
+  position: relative;
+  width: 100%;
+}
+
+/* ===================== HERO SECTION ===================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at 50% 60%, #1a0000 0%, #0a0a0a 60%);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 59px,
+      rgba(255, 255, 255, 0.02) 60px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 59px,
+      rgba(255, 255, 255, 0.02) 60px
+    );
+  pointer-events: none;
+}
+
+.hero-logo-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  user-select: none;
+}
+
+.hero-logo {
+  width: clamp(320px, 55vw, 680px);
+  animation: logoFloat 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 30px rgba(230, 32, 32, 0.5));
+  transition: filter 0.3s;
+}
+
+.hero-logo:hover {
+  filter: drop-shadow(0 0 60px rgba(230, 32, 32, 0.9));
+}
+
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0px) rotate(-1deg); }
+  50% { transform: translateY(-18px) rotate(1deg); }
+}
+
+.hero-logo-popup {
+  animation: logoPopIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, logoFloat 4s ease-in-out 0.7s infinite;
+  opacity: 0;
+}
+
+@keyframes logoPopIn {
+  0% { transform: scale(0.2) rotate(-15deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.hero-tagline {
+  margin-top: 32px;
+  font-family: var(--font-heading);
+  font-size: clamp(0.8rem, 2vw, 1.1rem);
+  letter-spacing: 8px;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  animation: fadeInUp 1s 0.8s ease both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: fadeInUp 1s 1.2s ease both;
+}
+
+.hero-scroll-hint span {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.25);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--red), transparent);
+  animation: scrollPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Sticker */
+.sticker {
+  position: absolute;
+  pointer-events: none;
+  z-index: 9999;
+  animation: stickerPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transform-origin: center;
+  width: 160px;
+  height: 160px;
+}
+
+@keyframes stickerPop {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-20deg); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(var(--rot, -5deg)); opacity: 1; }
+}
+
+/* ===================== ABOUT SECTION ===================== */
+.about {
+  position: relative;
+  padding: clamp(80px, 12vw, 140px) clamp(20px, 6vw, 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  overflow: hidden;
+  background: #050505;
+}
+
+.about::before {
+  content: 'POWER RANGERS';
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: clamp(60px, 15vw, 180px);
+  color: rgba(255,255,255,0.015);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+.about-neon-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 7vw, 5.5rem);
+  text-align: center;
+  line-height: 1;
+  color: #fff;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 20px var(--red),
+    0 0 40px var(--red),
+    0 0 80px var(--red),
+    0 0 120px #ff000066;
+  animation: neonFlicker 5s ease-in-out infinite;
+}
+
+@keyframes neonFlicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 20px var(--red),
+      0 0 40px var(--red),
+      0 0 80px var(--red),
+      0 0 120px #ff000066;
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+    color: rgba(255,255,255,0.8);
+  }
+}
+
+.about-bubble {
+  max-width: 680px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 60px;
+  padding: clamp(32px, 5vw, 56px) clamp(28px, 5vw, 60px);
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.about-bubble::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 60px;
+  background: linear-gradient(135deg, rgba(230,32,32,0.2), transparent 50%, rgba(26,92,255,0.1));
+  z-index: -1;
+}
+
+.about-bubble p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 500;
+  text-align: center;
+}
+
+.about-bubble p strong {
+  color: var(--white);
+  font-weight: 700;
+}
+
+.about-stats {
+  display: flex;
+  gap: clamp(32px, 6vw, 80px);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.stat-item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: var(--red);
+  text-shadow: 0 0 20px var(--red-glow);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ===================== RANGER GRID ===================== */
+.ranger-section {
+  padding: clamp(80px, 12vw, 140px) clamp(20px, 6vw, 80px);
+  background: #0a0a0a;
+  position: relative;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 4.5rem);
+  line-height: 1;
+}
+
+.section-title span {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  letter-spacing: 5px;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+
+.ranger-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  position: relative;
+}
+
+.ranger-grid.group-hover .ranger-card {
+  filter: none !important;
+}
+
+.ranger-card {
+  position: relative;
+  aspect-ratio: 3/4;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 20px 16px;
+  overflow: hidden;
+  filter: grayscale(1) brightness(0.4);
+  transition: filter 0.4s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1), border-color 0.4s;
+  cursor: none;
+}
+
+.ranger-card:hover {
+  filter: none !important;
+  transform: scale(1.05) translateY(-8px);
+  z-index: 2;
+  border-color: rgba(255,255,255,0.2);
+}
+
+.ranger-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--ranger-color, #e62020);
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: 0;
+}
+
+.ranger-card:hover::before {
+  opacity: 0.08;
+}
+
+.ranger-helm-img {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.8));
+  transition: transform 0.4s ease;
+}
+
+.ranger-card:hover .ranger-helm-img {
+  transform: translateX(-50%) scale(1.08) translateY(-5px);
+}
+
+.ranger-name {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-heading);
+  letter-spacing: 3px;
+  font-size: clamp(0.7rem, 1.5vw, 1rem);
+  color: rgba(255,255,255,0.7);
+  transition: color 0.3s;
+}
+
+.ranger-card:hover .ranger-name {
+  color: #fff;
+}
+
+.ranger-color-dot {
+  position: relative;
+  z-index: 1;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ranger-color);
+  margin-top: 6px;
+  box-shadow: 0 0 8px var(--ranger-color);
+}
+
+.plus-btn {
+  position: relative;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  aspect-ratio: 3/4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: none;
+  transition: border-color 0.3s, background 0.3s;
+  text-decoration: none;
+  color: rgba(255,255,255,0.3);
+  overflow: hidden;
+}
+
+.plus-btn:hover {
+  border-color: var(--red);
+  background: rgba(230,32,32,0.08);
+  color: var(--red);
+}
+
+.plus-icon {
+  font-size: 2rem;
+  line-height: 1;
+  transition: transform 0.3s;
+}
+
+.plus-btn:hover .plus-icon {
+  transform: rotate(90deg);
+}
+
+.plus-label {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+}
+
+/* ===================== POSTER FOUNTAIN ===================== */
+.poster-fountain {
+  position: relative;
+  height: 500px;
+  background: linear-gradient(to bottom, #0a0a0a, #050505);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: none;
+}
+
+.poster-fountain-bg-text {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 10vw, 8rem);
+  color: rgba(255,255,255,0.04);
+  text-align: center;
+  user-select: none;
+  pointer-events: none;
+  line-height: 1.1;
+}
+
+.poster-fountain-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  letter-spacing: 5px;
+  color: rgba(255,255,255,0.2);
+  text-align: center;
+}
+
+.fountain-poster {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.7);
+  width: 120px;
+  height: 160px;
+  object-fit: cover;
+  will-change: transform, opacity;
+}
+
+/* ===================== FOOTER ===================== */
+.site-footer {
+  background: #030303;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 40px clamp(20px, 6vw, 80px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-logo-text {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--red);
+  text-shadow: 0 0 15px var(--red-glow);
+}
+
+.footer-copy {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.2);
+}
+
+/* ===================== MOVIE GALLERY ===================== */
+.movie-gallery {
+  padding: clamp(80px, 12vw, 140px) clamp(20px, 6vw, 80px);
+  background: #070707;
+  position: relative;
+  overflow: hidden;
+}
+
+.movie-gallery::before {
+  content: 'FILM';
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: clamp(100px, 25vw, 280px);
+  color: rgba(255,255,255,0.018);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.movie-gallery-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 56px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.movie-gallery-sub {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.25);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+/* Horizontal scroll grid: 3 visible, peek at 4th */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+/* Each poster card */
+.movie-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 2/3;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: none;
+  text-decoration: none;
+  background: #111;
+
+  /* Start slightly tilted, straightens on hover */
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.3, 0.64, 1),
+    box-shadow 0.45s ease;
+}
+
+.movie-card:nth-child(odd) {
+  transform: rotate(-1.5deg);
+}
+.movie-card:nth-child(even) {
+  transform: rotate(1deg) translateY(8px);
+}
+
+.movie-card--hovered {
+  transform: rotate(0deg) translateY(-12px) scale(1.04) !important;
+  z-index: 10;
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.8),
+    0 0 0 1px rgba(230,32,32,0.4),
+    0 0 40px rgba(230,32,32,0.15);
+}
+
+.movie-poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease, filter 0.4s ease;
+}
+
+.movie-card--hovered .movie-poster-img {
+  transform: scale(1.06);
+  filter: brightness(0.55);
+}
+
+/* Gradient overlay always present at bottom */
+.movie-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.95) 0%,
+    rgba(0,0,0,0.3) 50%,
+    transparent 100%
+  );
+  transition: opacity 0.4s;
+}
+
+.movie-card--hovered .movie-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.98) 0%,
+    rgba(0,0,0,0.6) 60%,
+    rgba(0,0,0,0.2) 100%
+  );
+}
+
+/* "Nonton?" label that follows the cursor */
+.nonton-label {
+  position: absolute;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+
+  animation: nontonPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes nontonPop {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.nonton-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: #fff;
+  text-shadow:
+    0 0 10px rgba(230,32,32,0.8),
+    0 2px 20px rgba(0,0,0,0.9);
+  mix-blend-mode: normal;
+}
+
+.nonton-arrow {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  color: var(--red);
+  text-shadow: 0 0 10px var(--red-glow);
+  line-height: 1;
+}
+
+/* Bottom title info */
+.movie-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 18px 18px;
+  z-index: 5;
+  transform: translateY(6px);
+  transition: transform 0.4s ease;
+}
+
+.movie-card--hovered .movie-info {
+  transform: translateY(0);
+}
+
+.movie-year {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  letter-spacing: 4px;
+  color: var(--red);
+  margin-bottom: 4px;
+}
+
+.movie-title {
+  font-family: var(--font-heading);
+  font-size: clamp(0.75rem, 1.5vw, 1rem);
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.9);
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* Glow border that appears on hover */
+.movie-glow-border {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  border: 1px solid transparent;
+  transition: border-color 0.4s, box-shadow 0.4s;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.movie-card--hovered .movie-glow-border {
+  border-color: rgba(230,32,32,0.5);
+  box-shadow: inset 0 0 30px rgba(230,32,32,0.08);
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+  .ranger-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .about-stats {
+    gap: 24px;
+  }
+  .movie-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .ranger-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .movie-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===================== LOOKING SECTION ===================== */
+.looking-section {
+  position: relative;
+  padding: clamp(100px, 14vw, 180px) clamp(20px, 8vw, 120px);
+  background: #030303;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.looking-topline {
+  position: absolute;
+  top: 0;
+  left: clamp(20px, 8vw, 120px);
+  right: clamp(20px, 8vw, 120px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+}
+
+/* Background orbs */
+.looking-bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+}
+.looking-bg-orb--1 {
+  width: 500px;
+  height: 500px;
+  background: rgba(230, 32, 32, 0.06);
+  top: -100px;
+  right: -100px;
+}
+.looking-bg-orb--2 {
+  width: 300px;
+  height: 300px;
+  background: rgba(26, 92, 255, 0.04);
+  bottom: -50px;
+  left: 10%;
+}
+
+/* Content wrapper with entrance animation */
+.looking-content {
+  position: relative;
+  z-index: 1;
+  text-align: left;
+  max-width: 1000px;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.looking-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Big headline */
+.looking-headline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 32px;
+}
+
+.looking-line1,
+.looking-line2 {
+  display: block;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: clamp(3rem, 9vw, 7.5rem);
+  line-height: 1.05;
+  color: #fff;
+  letter-spacing: -1px;
+}
+
+/* The eyeball inline element */
+.eyeball {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  /* Match the letter 'o' size */
+  width: 0.62em;
+  height: 0.62em;
+  vertical-align: middle;
+  margin: 0 0.01em;
+  /* Pull up a bit to align with cap height */
+  margin-bottom: 0.06em;
+}
+
+.eye-sclera {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.1);
+}
+
+.eye-pupil {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 45%;
+  height: 45%;
+  background: #111;
+  border-radius: 50%;
+  /* transition smooth but fast */
+  transition: transform 0.08s linear;
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.8);
+  /* tiny red iris ring */
+  outline: 2px solid rgba(230, 32, 32, 0.7);
+  outline-offset: 1px;
+}
+
+.eye-shine {
+  position: absolute;
+  top: 18%;
+  left: 58%;
+  width: 18%;
+  height: 18%;
+  background: rgba(255,255,255,0.9);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Sub text "We are looking for monster" */
+.looking-sub {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.1rem, 3vw, 2rem);
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+  transition: color 0.3s;
+  opacity: 0;
+  animation: none;
+}
+
+.looking-visible .looking-sub {
+  animation: fadeInUp 0.8s 0.35s ease forwards;
+}
+
+/* Make eyeballs in sub text smaller */
+.sub-eye-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+
+.sub-eye-wrap .eyeball {
+  width: 0.7em;
+  height: 0.7em;
+  margin-bottom: 0.05em;
+}
+
+.looking-highlight {
+  color: var(--red);
+  text-shadow: 0 0 20px rgba(230,32,32,0.5);
+  margin-left: 0.3em;
+}
+
+/* CTA Button */
+.looking-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 36px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 999px;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  cursor: none;
+  transition: border-color 0.3s, color 0.3s, background 0.3s, box-shadow 0.3s;
+  opacity: 0;
+}
+
+.looking-visible .looking-cta {
+  animation: fadeInUp 0.8s 0.55s ease forwards;
+}
+
+.looking-cta:hover {
+  border-color: var(--red);
+  color: #fff;
+  background: rgba(230,32,32,0.08);
+  box-shadow: 0 0 30px rgba(230,32,32,0.15);
+}
+
+.cta-arrow {
+  font-size: 1.1rem;
+  transition: transform 0.3s;
+}
+
+.looking-cta:hover .cta-arrow {
+  transform: translateX(5px);
+}
+
+/* ===================== RANGERS TEXT (CLIPPING) - FIXED ===================== */
+.rangers-text-section {
+  background: #030303;
+  padding: 100px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.rangers-text-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rangers-text-label {
+  font-family: var(--font-heading, sans-serif);
+  font-size: clamp(0.65rem, 1.5vw, 0.85rem);
+  letter-spacing: 8px;
+  color: rgba(255,255,255,0.2);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.rangers-letters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.rangers-letter {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: default;
+  animation: letterDrop 0.7s cubic-bezier(0.34, 1.3, 0.64, 1) both;
+}
+
+@keyframes letterDrop {
+  from { opacity: 0; transform: translateY(-40px) scale(0.8); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.letter-clip-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* --- LOGIKA CLIPPING GAMBAR DI DALAM HURUF --- */
+.letter-char {
+  font-family: var(--font-display, 'Arial Black', sans-serif);
+  font-size: clamp(100px, 18vw, 350px);
+  font-weight: 900;
+  line-height: 1;
+  
+  /* WAJIB: Membuat huruf transparan agar background terlihat */
+  color: transparent; 
+  
+  /* Memotong background agar hanya muncul di dalam bentuk huruf */
+  background-size: cover;
+  background-position: center top;
+  -webkit-background-clip: text;
+  background-clip: text;
+  
+  /* Efek awal: agak gelap dan hitam putih */
+  filter: grayscale(0.6) brightness(0.7);
+  transition: all 0.4s ease;
+  user-select: none;
+}
+
+/* Sembunyikan gambar img bawaan karena kita pindah ke background-image di .letter-char */
+.letter-pose-img {
+  display: none; 
+}
+
+/* HOVER: Huruf jadi berwarna dan membesar */
+.rangers-letter:hover .letter-char {
+  filter: grayscale(0) brightness(1.1);
+  transform: scale(1.05);
+  /* Cahaya neon tipis di belakang huruf */
+  text-shadow: 0 0 25px var(--glow);
+}
+
+/* Garis Glow di bawah setiap huruf */
+.rangers-letter::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 0%; /* Mulai dari nol */
+  height: 3px;
+  background: var(--glow, #fff);
+  box-shadow: 0 0 12px var(--glow, #fff);
+  transition: width 0.3s ease;
+}
+
+.rangers-letter:hover::after {
+  width: 70%;
+}
+
+/* Label nama Ranger (Red, Yellow, dll) */
+.letter-ranger-name {
+  font-family: var(--font-heading, sans-serif);
+  font-size: clamp(0.5rem, 1vw, 0.75rem);
+  letter-spacing: 3px;
+  color: transparent; /* Sembunyi sebelum di-hover */
+  text-transform: uppercase;
+  padding: 10px 0 20px;
+  transition: color 0.3s;
+}
+
+.rangers-letter:hover .letter-ranger-name {
+  color: var(--glow);
+}
+
+.rangers-text-bottomline {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+}
+
+/* Responsive: agar tidak pecah di layar kecil */
+@media (max-width: 768px) {
+  .rangers-letters {
+    flex-wrap: nowrap;
+  }
+  .letter-char {
+    font-size: clamp(50px, 15vw, 100px);
+  }
+}
+
+/* Responsive: shrink on mobile */
+@media (max-width: 768px) {
+  .ranger-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .about-stats {
+    gap: 24px;
+  }
+  .movie-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .rangers-letters {
+    flex-wrap: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .ranger-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .movie-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

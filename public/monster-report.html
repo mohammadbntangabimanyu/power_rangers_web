@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laporkan Monster — Power Rangers HQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #e62020;
+      --red-glow: #ff000077;
+    }
+
+    body {
+      background: #050505;
+      color: #f0f0f0;
+      font-family: 'Rajdhani', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      cursor: none;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 80% 20%, rgba(230,32,32,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(26,92,255,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* Custom cursor */
+    .cursor-dot {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #fff;
+      mix-blend-mode: difference;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 580px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      margin-bottom: 40px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: #fff; }
+
+    .form-header {
+      margin-bottom: 48px;
+    }
+
+    .form-eyetag {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 5px;
+      color: var(--red);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-eyetag::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    h1 {
+      font-family: 'Black Ops One', cursive;
+      font-size: clamp(2.2rem, 7vw, 4rem);
+      line-height: 1;
+      color: #fff;
+      text-shadow: 0 0 40px rgba(230,32,32,0.3);
+    }
+
+    h1 span {
+      color: var(--red);
+      text-shadow: 0 0 30px var(--red-glow), 0 0 60px rgba(230,32,32,0.3);
+    }
+
+    .form-desc {
+      margin-top: 14px;
+      color: rgba(255,255,255,0.35);
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.7;
+    }
+
+    /* Form fields */
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 3px;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 8px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 14px 18px;
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+      resize: none;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--red);
+      background: rgba(230,32,32,0.04);
+      box-shadow: 0 0 0 3px rgba(230,32,32,0.08);
+    }
+
+    select option { background: #111; }
+
+    textarea { min-height: 110px; }
+
+    /* Danger level selector */
+    .danger-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .danger-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .danger-option input[type="radio"] { display: none; }
+
+    .danger-badge {
+      width: 100%;
+      padding: 10px 4px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.08);
+      text-align: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      transition: all 0.2s;
+      background: rgba(255,255,255,0.02);
+      color: rgba(255,255,255,0.4);
+    }
+
+    .danger-option input:checked + .danger-badge {
+      border-color: var(--color, var(--red));
+      background: rgba(var(--rgb, 230,32,32), 0.1);
+      color: #fff;
+      box-shadow: 0 0 16px rgba(var(--rgb, 230,32,32), 0.2);
+    }
+
+    /* Divider */
+    .form-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin: 32px 0;
+    }
+
+    /* Submit */
+    .submit-btn {
+      width: 100%;
+      padding: 17px;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Black Ops One', cursive;
+      font-size: 1.1rem;
+      letter-spacing: 3px;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover {
+      background: #ff0000;
+      box-shadow: 0 0 40px rgba(255,0,0,0.4);
+    }
+
+    .submit-btn:active { transform: scale(0.98); }
+
+    /* Urgency note */
+    .urgency-note {
+      margin-top: 16px;
+      text-align: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      color: rgba(255,255,255,0.18);
+    }
+
+    /* Success screen */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .success-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .success-screen h2 {
+      font-family: 'Black Ops One', cursive;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      color: var(--red);
+      text-shadow: 0 0 30px var(--red-glow);
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+
+    .success-screen p {
+      color: rgba(255,255,255,0.4);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      max-width: 380px;
+      margin: 0 auto 32px;
+    }
+
+    .success-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 3px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .success-back:hover {
+      border-color: var(--red);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <div class="container">
+    <a href="/" class="back-link">← KEMBALI KE MARKAS</a>
+
+    <!-- Form -->
+    <div id="formWrapper">
+      <div class="form-header">
+        <div class="form-eyetag">LAPORAN DARURAT</div>
+        <h1>LAPORKAN <span>MONSTER</span></h1>
+        <p class="form-desc">
+          Temukan ancaman di sekitarmu? Laporkan segera ke HQ Power Rangers.<br>
+          Tim kami siap bergerak dalam hitungan detik.
+        </p>
+      </div>
+
+      <form id="monsterForm">
+        <div class="form-group">
+          <label>NAMA PELAPOR</label>
+          <input type="text" placeholder="Siapa kamu, warga?" required />
+        </div>
+
+        <div class="form-group">
+          <label>LOKASI KEMUNCULAN</label>
+          <input type="text" placeholder="Kota, area, atau koordinat..." required />
+        </div>
+
+        <div class="form-group">
+          <label>DESKRIPSI MONSTER</label>
+          <textarea placeholder="Ceritakan ciri-cirinya: warna, ukuran, kemampuan khusus, arah gerak..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>JENIS ANCAMAN</label>
+          <select required>
+            <option value="">— Pilih jenis —</option>
+            <option>Putty Patrol (pasukan biasa)</option>
+            <option>Monster Rita Repulsa</option>
+            <option>Ciptaan Lord Zedd</option>
+            <option>Serangan Goldar</option>
+            <option>Makhluk tak dikenal</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>TINGKAT BAHAYA</label>
+          <div class="danger-grid">
+            <label class="danger-option">
+              <input type="radio" name="danger" value="1" />
+              <div class="danger-badge" style="--color:#4caf50;--rgb:76,175,80;">
+                ⚠ RENDAH
+              </div>
+            </label>
+            <label class="danger-option">
+              <input type="radio" name="danger" value="2" />
+              <div class="danger-badge" style="--color:#f5c800;--rgb:245,200,0;">
+                ⚡ SEDANG
+              </div>
+            </label>
+            <label class="danger-option">
+              <input type="radio" name="danger" value="3" checked />
+              <div class="danger-badge" style="--color:#ff6b00;--rgb:255,107,0;">
+                🔥 TINGGI
+              </div>
+            </label>
+            <label class="danger-option">
+              <input type="radio" name="danger" value="4" />
+              <div class="danger-badge" style="--color:#e62020;--rgb:230,32,32;">
+                💀 KRITIS
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <hr class="form-divider" />
+
+        <button type="submit" class="submit-btn">KIRIM LAPORAN !</button>
+        <p class="urgency-note">LAPORAN DITERUSKAN LANGSUNG KE ZORDON — COMMAND CENTER</p>
+      </form>
+    </div>
+
+    <!-- Success screen -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">👁️</div>
+      <h2>LAPORAN DITERIMA,<br>RANGER!</h2>
+      <p>
+        Tim kami sudah menerima laporanmu.<br>
+        Power Rangers sedang dalam perjalanan menuju lokasi.<br>
+        Tetap aman dan jauhi monster.
+      </p>
+      <a href="/" class="success-back">← KEMBALI KE MARKAS</a>
+    </div>
+  </div>
+
+  <script>
+    // Cursor
+    const dot = document.getElementById('cursorDot')
+    document.addEventListener('mousemove', e => {
+      dot.style.left = e.clientX + 'px'
+      dot.style.top  = e.clientY + 'px'
+    })
+
+    // Form submit
+    document.getElementById('monsterForm').addEventListener('submit', function(e) {
+      e.preventDefault()
+      document.getElementById('formWrapper').style.display = 'none'
+      document.getElementById('successScreen').style.display = 'block'
+    })
+  </script>
+</body>
+</html>

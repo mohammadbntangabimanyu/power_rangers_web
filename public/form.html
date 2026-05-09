@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join the Rangers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #050505;
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, #1a0000 0%, #050505 70%);
+      z-index: 0;
+    }
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 520px;
+      padding: 20px;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #ff2222;
+      text-decoration: none;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      margin-bottom: 32px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: #fff; }
+    h1 {
+      font-family: 'Black Ops One', cursive;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      line-height: 1;
+      margin-bottom: 8px;
+      color: #fff;
+      text-shadow: 0 0 30px #ff0000aa, 0 0 60px #ff000055;
+    }
+    .subtitle {
+      color: #ff2222;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 4px;
+      font-size: 0.9rem;
+      margin-bottom: 40px;
+    }
+    .form-group {
+      margin-bottom: 24px;
+    }
+    label {
+      display: block;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 3px;
+      font-size: 0.8rem;
+      color: #888;
+      margin-bottom: 8px;
+    }
+    input, select {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 14px 18px;
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    input:focus, select:focus {
+      border-color: #ff2222;
+      background: rgba(255,34,34,0.05);
+    }
+    select option { background: #111; }
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    .color-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .color-swatch {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .color-option input[type="radio"] { display: none; }
+    .color-option input:checked + .color-swatch { border-color: #fff; transform: scale(1.15); }
+    .color-option span { font-size: 0.7rem; letter-spacing: 1px; color: #666; }
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: #ff2222;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Black Ops One', cursive;
+      font-size: 1.2rem;
+      letter-spacing: 3px;
+      cursor: pointer;
+      margin-top: 16px;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+    }
+    .submit-btn:hover {
+      background: #ff0000;
+      box-shadow: 0 0 30px #ff000077;
+    }
+    .submit-btn:active { transform: scale(0.98); }
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .success-msg h2 {
+      font-family: 'Black Ops One', cursive;
+      font-size: 2rem;
+      color: #ff2222;
+      text-shadow: 0 0 20px #ff000077;
+      margin-bottom: 12px;
+    }
+    .success-msg p { color: #888; font-size: 1.1rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/" class="back-link">← KEMBALI KE MARKAS</a>
+    <h1>DAFTAR RANGER</h1>
+    <p class="subtitle">PILIH WARNAMU — LINDUNGI BUMI</p>
+
+    <form id="rangerForm">
+      <div class="form-group">
+        <label>NAMA RANGER</label>
+        <input type="text" placeholder="Masukkan nama heromu..." required />
+      </div>
+      <div class="form-group">
+        <label>KOTA ASAL</label>
+        <input type="text" placeholder="Angel Grove, atau..." required />
+      </div>
+      <div class="form-group">
+        <label>KEAHLIAN UTAMA</label>
+        <select required>
+          <option value="">— Pilih keahlian —</option>
+          <option>Martial Arts</option>
+          <option>Technology</option>
+          <option>Stealth & Agility</option>
+          <option>Leadership</option>
+          <option>Brute Strength</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>PILIH WARNA RANGER</label>
+        <div class="color-grid">
+          <label class="color-option">
+            <input type="radio" name="color" value="red" checked />
+            <div class="color-swatch" style="background:#e62020;"></div>
+            <span>RED</span>
+          </label>
+          <label class="color-option">
+            <input type="radio" name="color" value="blue" />
+            <div class="color-swatch" style="background:#1a5cff;"></div>
+            <span>BLUE</span>
+          </label>
+          <label class="color-option">
+            <input type="radio" name="color" value="black" />
+            <div class="color-swatch" style="background:#333;border:2px solid #666;"></div>
+            <span>BLACK</span>
+          </label>
+          <label class="color-option">
+            <input type="radio" name="color" value="yellow" />
+            <div class="color-swatch" style="background:#f5c800;"></div>
+            <span>YELLOW</span>
+          </label>
+          <label class="color-option">
+            <input type="radio" name="color" value="green" />
+            <div class="color-swatch" style="background:#1db85a;"></div>
+            <span>GREEN</span>
+          </label>
+        </div>
+      </div>
+      <button type="submit" class="submit-btn">IT'S MORPHIN TIME!</button>
+    </form>
+
+    <div class="success-msg" id="successMsg">
+      <h2>SELAMAT DATANG, RANGER!</h2>
+      <p>Kamu resmi bergabung dalam tim Power Rangers.<br>Lindungi bumi dengan segenap jiwa dan ragamu.</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('rangerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
