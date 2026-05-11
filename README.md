@@ -10,8 +10,6 @@ npm install
 ```
 
 ### 2. Tempatkan Asset
-Salin file-file berikut dari folder assets kamu ke `src/assets/`:
-
 **`src/assets/`**
 - `ASET_LOGO.png` — Logo Power Rangers utama
 - `hero.png` — (opsional, hero background)
@@ -28,9 +26,9 @@ Salin file-file berikut dari folder assets kamu ke `src/assets/`:
 - `helm_hitam.png`
 - `helm_kuning.png`
 - `helm_hijau.png`
-- `helm_pink.png` ← **BARU**
+- `helm_pink.png` ← 
 
-**`src/assets/pose/`** ← **FOLDER BARU**
+**`src/assets/pose/`** 
 - `pose_merah.png`
 - `pose_biru.png`
 - `pose_hitam.png`
